@@ -12,7 +12,7 @@ const RestaurantList = (props) => {
     const fetchData = async () => {
         try {
           const response = await RestaurantFinder.get("/");
-          console.log(response.data.data);
+        //   console.log('fetchin data',response.data.data);
           setRestaurants(response.data.data.restaurants);
         } catch (err) {}
       };
@@ -38,6 +38,7 @@ const RestaurantList = (props) => {
   };
 
   const handleRestaurantSelect = async (id) => {
+    // console.log('sent id ', restaurants)
     navigate(`/restaurants/${id}`)
   };
 
