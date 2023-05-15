@@ -7,7 +7,7 @@ const Reviews = ({ reviews }) => {
         {reviews.map((review) => {
           return (
             <div
-              key={review.id}
+              key={review.reviews_id}
               className="card text-white bg-primary mb-3 mr-4"
               style={{ width: "30%" }}
             >
