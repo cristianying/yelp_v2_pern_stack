@@ -12,7 +12,7 @@ const UpdateRestaurant = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await RestaurantFinder.get(`/${id}`);
+      const response = await RestaurantFinder.get(`/api/v1/restaurants/${id}`);
       console.log(response.data.data.restaurant);
       setName(response.data.data.restaurant.name);
       setLocation(response.data.data.restaurant.location);
@@ -24,7 +24,7 @@ const UpdateRestaurant = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedRestaurant = await RestaurantFinder.put(`/${id}`, {
+    const updatedRestaurant = await RestaurantFinder.put(`/api/v1/restaurants/${id}`, {
       name,
       location,
       price_range: priceRange,

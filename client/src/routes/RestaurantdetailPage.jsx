@@ -12,7 +12,7 @@ const RestaurantdetailPage = () => {
 
   useEffect(() => {
     const fetchData = async () =>{
-      const response = await RestaurantFinder.get(`/${id}`);
+      const response = await RestaurantFinder.get(`/api/v1/restaurants/${id}`);
       console.log(response.data.data.restaurant.name, 'testing');
       setSelectedRestaurant(response.data.data);
 
