@@ -8,7 +8,7 @@ import RestaurantFinder from "../apis/RestaurantFinder"
 
 const Home = ({setAuth}) => {
 
-  const [name, setName]=useState("");
+  const [setName]=useState("");
   const {restaurants,setRestaurants} = useContext(RestaurantsContext);
 
   // const getName = async () =>{
