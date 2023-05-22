@@ -4,25 +4,26 @@ import { RestaurantsContext } from "../context/RestaurantsContext";
 import { useNavigate } from "react-router-dom";
 import StarRating from "./StarRating";
 
-const RestaurantList = (props) => {
-  const { restaurants, setRestaurants } = useContext(RestaurantsContext);
+const RestaurantList = ({restaurants}) => {
+  const {setRestaurants } = useContext(RestaurantsContext);
   let navigate = useNavigate()
 
-  useEffect(() => {
-    const fetchData = async () => {
-        try {
-          const response = await RestaurantFinder.get("/");
-        //   console.log('fetchin data',response.data.data);
-          setRestaurants(response.data.data.restaurants);
-        } catch (err) {}
-      };
-    fetchData();
-  }, []);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//         try {
+//           const response = await RestaurantFinder.get("/api/v1/restaurants/");
+//           console.log(response.data.data);
+//           setRestaurants(response.data.data.restaurants);
+//         } catch (err) {}
+//       };
+//     fetchData();
+//   }, []);
 
   const handleDelete = async (e, id) => {
     e.stopPropagation()
     try {
-      const response = await RestaurantFinder.delete(`/${id}`);
+      const response = await RestaurantFinder.delete(`/api/v1/restaurants/${id}`);
       console.log(response.data.data);
       setRestaurants(restaurants.filter(restaurant =>{
         return restaurant.restaurant_id !== id

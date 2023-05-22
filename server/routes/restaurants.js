@@ -1,17 +1,20 @@
 const router = require("express").Router();
 const db =require("../db/index.js");
+const authorization = require("../middleware/authorization.js");
 
 
 // get all restaurants
-router.get("/", async (req, res) => {
+router.get("/", authorization, async (req, res) => {
     try {
+        // console.log(req.user);
       const results = await db.query(
-          "select * from restaurants left join (select restaurant_id as rest_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by restaurant_id) reviews on restaurants.restaurant_id = reviews.rest_id;");
-      // console.log(results.rows);
+          "select * from restaurants left join (select restaurant_id as rest_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by restaurant_id) reviews on restaurants.restaurant_id = reviews.rest_id right join users on users.user_id=restaurants.user_id WHERE users.user_id=$1;",
+          [req.user.id]);
+          
       res.status(200).json({
         status: "Success",
         data: {
-          restaurants: results.rows,
+          restaurant: results.rows,
         },
       });
     } catch (err) {
@@ -47,12 +50,12 @@ router.get("/", async (req, res) => {
   });
   
   // create restaurant
-  router.post("/", async (req, res) => {
+  router.post("/", authorization, async (req, res) => {
     try {
       // sql injections protection
       const results = await db.query(
-        "INSERT INTO restaurants (name, location, price_range) VALUES ($1, $2, $3) returning *",
-        [req.body.name, req.body.location, req.body.price_range]
+        "INSERT INTO restaurants (user_id, name, location, price_range) VALUES ($1, $2, $3, $4) returning *",
+        [req.user.id, req.body.name, req.body.location, req.body.price_range]
       );
   
       // console.log(results.rows[0]);
