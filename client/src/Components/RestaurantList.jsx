@@ -8,6 +8,7 @@ const RestaurantList = ({restaurants}) => {
   const {setRestaurants } = useContext(RestaurantsContext);
   let navigate = useNavigate()
 
+
 //   useEffect(() => {
 //     const fetchData = async () => {
 //         try {
@@ -38,6 +39,7 @@ const RestaurantList = ({restaurants}) => {
   };
 
   const handleRestaurantSelect = async (id) => {
+    // console.log('sent id ', restaurants)
     navigate(`/restaurants/${id}`)
   };
 

@@ -20,7 +20,6 @@ const AddRestaurant = () => {
         headers: {token: localStorage.token},
         }
       );
-
       // console.log(response.data.data);
       addRestaurants(response.data.data.restaurant);
     } catch (err) {
