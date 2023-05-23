@@ -12,7 +12,7 @@ const AddReview = () => {
   const handleSubmitReview = async (e) => {
     e.preventDefault();
     try {
-      await RestaurantFinder.post(`/api/v1/restaurants/${id}/addReview`, {
+      const response = await RestaurantFinder.post(`/api/v1/restaurants/${id}/addReview`, {
         name,
         review: reviewText,
         rating,
