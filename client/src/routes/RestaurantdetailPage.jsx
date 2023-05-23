@@ -22,7 +22,7 @@ const RestaurantdetailPage = () => {
     }, [])
 
   return (
-    <div>{selectedRestaurant && (
+    <div className='container'>{selectedRestaurant && (
       <>
         <h1 className='text-center display=1'>{selectedRestaurant.restaurant.name}</h1>
         <div className="text-center">
